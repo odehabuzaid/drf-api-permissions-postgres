@@ -22,12 +22,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 import os
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+keystr = os.environ.get("SECRET_KEY")
+
+SECRET_KEY = keystr if keystr else "foo"
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.environ.get("DEBUG", default=0))
+envstr = os.environ.get("DEBUG", default=0)
 
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+DEBUG = int(envstr) if envstr else 1
 
+envstr = os.environ.get("DJANGO_ALLOWED_HOSTS")
+
+ALLOWED_HOSTS = envstr.split(" ") if envstr else ["0.0.0.0", "localhost", "127.0.0.1"]
 
 
 # Application definition
