@@ -5,11 +5,11 @@ from .models import Task
 
 
 class TaskSerializer(serializers.ModelSerializer):
-    user = serializers.ReadOnlyField(source="user")
     
+
     class Meta:
         model = Task
-        fields = ("user", "task", "label", "created_at", "status")
+        fields = ("task", "label", "created_at", "status", "user")
         labels = {"status": "complete"}
 
 

@@ -3,12 +3,12 @@ from rest_framework import generics, permissions
 
 from .models import Task
 from .permissions import IsOwner
-from .serializer import UserSerializer
+from .serializer import TaskSerializer, UserSerializer
 
 
-class TasksList(generics.ListAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class TasksList(generics.ListCreateAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
     success_url = "?format=api"
     permission_classes = [permissions.IsAuthenticated, IsOwner]
     
@@ -16,8 +16,8 @@ class TasksList(generics.ListAPIView):
         serializer.save(owner=self.request.user)
 
 
-class TasksDetail(generics.RetrieveAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class TasksDetail(generics.RetrieveUpdateAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
     success_url = "?format=api"
     permission_classes = [permissions.IsAuthenticated, IsOwner]
