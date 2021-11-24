@@ -46,9 +46,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "accounts",
     "todoapi",
 ]
-
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -60,6 +60,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "todo.urls"
+
+
+AUTH_USER_MODEL = "accounts.TodoUser"
+
 
 TEMPLATES = [
     {

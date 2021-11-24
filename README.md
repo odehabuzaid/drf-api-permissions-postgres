@@ -2,6 +2,9 @@
 
 # Lab: Permissions & Postgresql
 
+admin :  Pass@123
+user  :  Pass@123
+
 ## Overview
 
 Let's move our site closer to production grade by adding Permissions and Postgresql Database.

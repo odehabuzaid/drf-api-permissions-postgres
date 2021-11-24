@@ -1,10 +1,7 @@
+from accounts import models
 from django import forms
-from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.db import models
-from pygments import highlight
-from pygments.formatters.html import HtmlFormatter
-from pygments.lexers import get_lexer_by_name
 
 LABEL_CHOICES = (
     ("NoLabel", "High"),
@@ -18,7 +15,7 @@ LABEL_CHOICES = (
 # Create your models here.
 class Task(models.Model):
     user = models.ForeignKey(
-        "auth.User", related_name="tasks", on_delete=models.CASCADE
+        get_user_model(), on_delete=models.CASCADE, null=True, blank=True
     )
     task = models.CharField(max_length=20)
     label = models.CharField(max_length=10, choices=LABEL_CHOICES, default="NoLabel")
@@ -28,10 +25,3 @@ class Task(models.Model):
 
     def __str__(self):
         return self.task
-
-    def save(self, *args, **kwargs):
-        """
-        Use the `pygments` library to create a highlighted HTML
-        representation of the code snippet.
-        """
-        super(Task, self).save(*args, **kwargs)
